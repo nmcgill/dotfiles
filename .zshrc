@@ -59,9 +59,9 @@ alias tmux="TERM=screen-256color-bce tmux -u"
 DISABLE_AUTO_TITLE=true
 
 # chruby 
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-source /usr/local/opt/chruby/share/chruby/auto.sh
-RUBIES+=(~/.rbenv/versions/*)
+#source /usr/local/opt/chruby/share/chruby/chruby.sh
+#source /usr/local/opt/chruby/share/chruby/auto.sh
+#RUBIES+=(~/.rbenv/versions/*)
 
 # rbenv
 #export PATH="$HOME/.rbenv/bin:$PATH"
@@ -76,12 +76,12 @@ RUBIES+=(~/.rbenv/versions/*)
 # confluent platform
 # TEMP - figure out way to switch different versions - oss vs ent, 3.3, 3.4, etc
 # symlink
-export CONFLUENT_PLATFORM_VERSION=6.1.1
-export CONFLUENT_HOME=~/projects/confluent/confluent-ent/$CONFLUENT_PLATFORM_VERSION
+#export CONFLUENT_PLATFORM_VERSION=6.1.1
+#export CONFLUENT_HOME=~/projects/confluent/confluent-ent/$CONFLUENT_PLATFORM_VERSION
 #export CONFLUENT_HOME=~/projects/confluent/confluent-oss/$CONFLUENT_PLATFORM_VERSION
-export PATH=$CONFLUENT_HOME/bin:~/bin:$PATH
-confluent completion zsh > ${fpath[1]}/_confluent
-alias cflt="confluent"
+#export PATH=$CONFLUENT_HOME/bin:~/bin:$PATH
+#confluent completion zsh > ${fpath[1]}/_confluent
+#alias cflt="confluent"
 
 ## GCP completion
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
@@ -92,6 +92,7 @@ export GOPATH="${HOME}/.go"
 # brew --prefix is slow
 #export GOROOT="$(brew --prefix golang)/libexec"
 export GOROOT="/usr/local/opt/go/libexec"
+export KAFKA_ROOT="/Users/nmcgill/kafka/bin"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 test -d "${GOPATH}" || mkdir "${GOPATH}"
@@ -205,7 +206,7 @@ zplug "nnao45/zsh-kubectl-completion"
 #zplug plugins/thefuck, from:oh-my-zsh
 zplug "laggardkernel/zsh-thefuck", as:plugin, use:"zsh-thefuck.plugin.zsh"
 
-zplug "~/projects/dotfiles/zsh_custom", from:local
+zplug "~/dev/dotfiles/zsh_custom", from:local
 
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
@@ -252,5 +253,28 @@ function kube-toggle() {
 }
 
 unalias gm
-source ~/.minikube-completion
+#source ~/.minikube-completion
+
+# place this after nvm initialization!
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+ 
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+ 
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+
 export PATH="/usr/local/sbin:$PATH"

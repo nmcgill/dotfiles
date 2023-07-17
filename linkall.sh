@@ -14,20 +14,20 @@ rm ~/.tmux.conf
 rm ~/.vimrc
 rm ~/.p10k.zsh
 
-ln -s ~/projects/dotfiles/antigen.zsh ~/.antigen.zsh
-ln -s ~/projects/dotfiles/.zshrc ~/.zshrc
-ln -s ~/projects/dotfiles/.gitconfig ~/.gitconfig
-ln -s ~/projects/dotfiles/.gitignore ~/.gitignore
-ln -s ~/projects/dotfiles/.jshintrc ~/.jshintrc
-ln -s ~/projects/dotfiles/.inputrc ~/.inputrc
-ln -s ~/projects/dotfiles/.tigrc ~/.tigrc
-ln -s ~/projects/dotfiles/.vimrc ~/.vimrc
-ln -s ~/projects/dotfiles/.ssh/config ~/.ssh/config
-ln -s ~/projects/dotfiles/.dircolors ~/.dircolors
-ln -s ~/projects/dotfiles/.mackup.cfg ~/.mackup.cfg
-ln -s ~/projects/dotfiles/.tmux.conf ~/.tmux.conf
-ln -s ~/projects/dotfiles/.p10k.zsh ~/.p10k.zsh
-ln -s ~/projects/dotfiles/.deck.yaml ~/.deck.yaml
+ln -s ~/dev/dotfiles/antigen.zsh ~/.antigen.zsh
+ln -s ~/dev/dotfiles/.zshrc ~/.zshrc
+ln -s ~/dev/dotfiles/.gitconfig ~/.gitconfig
+ln -s ~/dev/dotfiles/.gitignore ~/.gitignore
+ln -s ~/dev/dotfiles/.jshintrc ~/.jshintrc
+ln -s ~/dev/dotfiles/.inputrc ~/.inputrc
+ln -s ~/dev/dotfiles/.tigrc ~/.tigrc
+ln -s ~/dev/dotfiles/.vimrc ~/.vimrc
+ln -s ~/dev/dotfiles/.ssh/config ~/.ssh/config
+ln -s ~/dev/dotfiles/.dircolors ~/.dircolors
+ln -s ~/dev/dotfiles/.mackup.cfg ~/.mackup.cfg
+ln -s ~/dev/dotfiles/.tmux.conf ~/.tmux.conf
+ln -s ~/dev/dotfiles/.p10k.zsh ~/.p10k.zsh
+ln -s ~/dev/dotfiles/.deck.yaml ~/.deck.yaml
 
 ls -lah ~/.zshrc
 ls -lah ~/.gitconfig
